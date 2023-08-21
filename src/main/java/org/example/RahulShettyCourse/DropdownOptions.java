@@ -1,27 +1,39 @@
 package org.example.RahulShettyCourse;
 
+import BrowserSetup.BrowserSetup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
 
-public class StaticDropdown {
+public class DropdownOptions {
     public static void main(String[] args) throws InterruptedException {
-        WebDriver webDriver = new ChromeDriver();
+        WebDriver webDriver = null;
         String websiteUrl = "https://rahulshettyacademy.com/dropdownsPractise/";
-        browserSetup(webDriver, websiteUrl);
-//      staticDropdownOperations(webDriver);
+
+        BrowserSetup browserSetup = new BrowserSetup();
+        webDriver = browserSetup.chromeBrowserSetup(webDriver, websiteUrl);
+
+
+//        browserSetup(webDriver, websiteUrl);
+        staticDropdownOperations(webDriver);
         passengersDropdownOption(webDriver);
+
+        /*Below 2 line is for calling Dynamic Dropdown class in this class to prevent excessive main
+            method creation and WebDriver call*/
+        DynamicDropdownOptions dynamicDropdownOptions = new DynamicDropdownOptions();
+        dynamicDropdownOptions.departureFieldAction(webDriver);
+
+        // TODO: 22-08-2023 add arrival city flow for selection option and date part too. 
     }
-    public static void browserSetup(WebDriver webDriver, String websiteUrl) {
-        webDriver.get(websiteUrl);
-        webDriver.manage().window().maximize();
-    }
+//    public static void browserSetup(WebDriver webDriver, String websiteUrl) {
+//        webDriver.get(websiteUrl);
+//        webDriver.manage().window().maximize();
+//    }
 
     public static void staticDropdownOperations(WebDriver webDriver) throws InterruptedException {
         By currencyDropdown = By.cssSelector("#ctl00_mainContent_DropDownListCurrency");
@@ -54,6 +66,7 @@ public class StaticDropdown {
     }
 
     public static void passengersDropdownOption(WebDriver webDriver) throws InterruptedException {
+        int z =0; //For loop on button click
         By passengerDropdownOption = By.xpath("//div[@id='divpaxinfo']");
 
         //Adult option in the dropdown
@@ -78,12 +91,22 @@ public class StaticDropdown {
         try {
 
             Thread.sleep(1000);
-            webDriver.findElement(adultOptionIncreaseButton).click();
-            webDriver.findElement(childOptionIncreaseButton).click();
-            webDriver.findElement(infantOptionIncreaseButton).click();
+            while (z<10) {
+                webDriver.findElement(adultOptionIncreaseButton).click();
+                webDriver.findElement(childOptionIncreaseButton).click();
+                webDriver.findElement(infantOptionIncreaseButton).click();
+                z++;
+
+                /*
+                This above loop will break at selection of "5 Adult, 4 Child, 4 Infant" as in total
+                only 9 passengers booking is allowed
+                */
+            }
+
+
 
         } catch (Exception e) {
-
+            System.out.println(e);
         }
 
         //Clicking done button after operation
