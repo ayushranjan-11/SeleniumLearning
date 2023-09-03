@@ -27,6 +27,8 @@ public class DropdownOptions {
             method creation and WebDriver call*/
         DynamicDropdownOptions dynamicDropdownOptions = new DynamicDropdownOptions();
         dynamicDropdownOptions.departureFieldAction(webDriver);
+        Thread.sleep(2000);
+        dynamicDropdownOptions.arrivalFieldAction(webDriver);
 
         // TODO: 22-08-2023 add arrival city flow for selection option and date part too. 
     }
@@ -40,10 +42,10 @@ public class DropdownOptions {
 
         WebElement currencyDropDownOption = webDriver.findElement(currencyDropdown);
         Select select = new Select(currencyDropDownOption);
-        List<WebElement>availableOptions = select.getOptions();
+        List<WebElement> availableOptions = select.getOptions();
 
         //Prints all available options in the static class
-        for (int i = 0; i<availableOptions.size();i++ ) {
+        for (int i = 0; i < availableOptions.size(); i++) {
             System.out.println(availableOptions.get(i).getText());
         }
 
@@ -61,12 +63,12 @@ public class DropdownOptions {
         if (!availableOptions.isEmpty()) {
             select.selectByVisibleText("INR");
             System.out.println("Now you have selected: "
-                    +select.getFirstSelectedOption().getText());
+                    + select.getFirstSelectedOption().getText());
         } else System.out.println("Unable to grab options from the dropdown");
     }
 
     public static void passengersDropdownOption(WebDriver webDriver) throws InterruptedException {
-        int z =0; //For loop on button click
+        int z = 0; //For loop on button click
         By passengerDropdownOption = By.xpath("//div[@id='divpaxinfo']");
 
         //Adult option in the dropdown
@@ -91,7 +93,7 @@ public class DropdownOptions {
         try {
 
             Thread.sleep(1000);
-            while (z<10) {
+            while (z < 10) {
                 webDriver.findElement(adultOptionIncreaseButton).click();
                 webDriver.findElement(childOptionIncreaseButton).click();
                 webDriver.findElement(infantOptionIncreaseButton).click();
@@ -102,7 +104,6 @@ public class DropdownOptions {
                 only 9 passengers booking is allowed
                 */
             }
-
 
 
         } catch (Exception e) {
