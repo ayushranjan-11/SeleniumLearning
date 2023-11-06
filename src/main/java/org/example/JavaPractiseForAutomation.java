@@ -1,12 +1,17 @@
 package org.example;
 
+import java.util.Locale;
+
 public class JavaPractiseForAutomation {
 
     public static void main(String[] args) {
-        stringReverse();
-       String returnTexts = vowelsCheck();
-       uniqueLetters(returnTexts);
-       terenaryOperatorPractise();
+//        stringReverse();
+//       String returnTexts = vowelsCheck();
+//       uniqueLetters(returnTexts);
+//       terenaryOperatorPractise();
+       largestElementInArray();
+       palindromeCheck();
+       factorialCalculations();
     }
 
     public static void stringReverse() {      //To reverse given string
@@ -67,6 +72,39 @@ public class JavaPractiseForAutomation {
 
         int c = (a>b)? a:b;
         System.out.println(c);
+    }
+
+    public static void largestElementInArray() {
+        int [] elementArray = {10, 15, 16, 59, 6, 100, 456, 3321, 5678, 893, 556, 6748, 43098, 78347, 89265, 77562, 98762, 92759};
+        int highestNumber = 0;
+
+        for(int i = 0; i < elementArray.length; i++) {
+            if (elementArray[i] > highestNumber) {
+                highestNumber=elementArray[i];
+            }
+
+        }
+        System.out.println(highestNumber);
+    }
+
+    public static void palindromeCheck() {
+        String checkString = "Eye";
+        checkString.toLowerCase();
+        String tempString ="";
+        for (int i = checkString.length()-1; i>= 0; i--) {
+            tempString+=checkString.charAt(i);
+        }
+        System.out.println("Given string is "+(tempString.equals(checkString))+ " palindrome");
+    }
+
+    public static void factorialCalculations() {
+        int givenNumber = 49;
+        long tempNumber = givenNumber;
+
+        for(int i = givenNumber-1; i>0; i--) {
+            tempNumber*=i;
+        }
+        System.out.println(tempNumber);
     }
 }
 
