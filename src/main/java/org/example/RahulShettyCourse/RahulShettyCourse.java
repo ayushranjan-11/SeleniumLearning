@@ -21,6 +21,7 @@ public class RahulShettyCourse {
         initiatingDropdown(driver);
         pickingPassengers(driver);
         dynamicDropdown(driver);
+        datePick(driver);
 
 //        Thread.sleep(2000);
 //        driver.quit();
@@ -82,7 +83,7 @@ public class RahulShettyCourse {
         */
     }
 
-    public static void dynamicDropdown(WebDriver driver) {
+    public static void dynamicDropdown(WebDriver driver) { //Dropdown for city selection
         //Initiating 1st Dropdown i.e FROM
         driver.findElement(By.id("ctl00_mainContent_ddl_originStation1_CTXT")).click();
 
@@ -96,5 +97,19 @@ public class RahulShettyCourse {
             driver.findElement(By.xpath("//a[normalize-space()='Bengaluru (BLR)']")).click();
 
         /*Dynamic dropdowns are those which are conditional or which don't have select as class in HTML*/
+    }
+
+    public static void datePick(WebDriver driver) {
+
+        //Clicking calendar option
+       // driver.findElement(departDate).click();
+        //Though above step is not required as option opens automatically when flow is straight to select
+        // people and location
+        driver.findElement(By.xpath("//input[@id='ctl00_mainContent_view_date1']")).click();
+        String preselectedDateInDepartDate = driver.findElement(By.id("view_fulldate_id_1")).getText();
+        System.out.println("Previously selected date in calendar is: "+preselectedDateInDepartDate);
+
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(2000));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[@class=' ui-datepicker-days-cell-over  ui-datepicker-today']"))).click();
     }
 }
