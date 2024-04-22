@@ -105,11 +105,13 @@ public class RahulShettyCourse {
        // driver.findElement(departDate).click();
         //Though above step is not required as option opens automatically when flow is straight to select
         // people and location
-        driver.findElement(By.xpath("//input[@id='ctl00_mainContent_view_date1']")).click();
+        //driver.findElement(By.xpath("//input[@id='ctl00_mainContent_view_date1']")).click();
         String preselectedDateInDepartDate = driver.findElement(By.id("view_fulldate_id_1")).getText();
         System.out.println("Previously selected date in calendar is: "+preselectedDateInDepartDate);
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(2000));
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td[@class=' ui-datepicker-days-cell-over  ui-datepicker-today']"))).click();
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10000));
+        //Changed the xpath to cssSelector
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ui-state-default.ui-state-highlight"))).click();
+        // driver.findElement(By.cssSelector(".ui-state-default.ui-state-highlight")).click();
     }
 }
