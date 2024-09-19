@@ -15,13 +15,17 @@ public class BrowserSetup {
         return webDriver;
     }
 
-    public void firefoxBrowserSetup(WebDriver webDriver, String url) {
+    public WebDriver firefoxBrowserSetup(WebDriver webDriver, String url) {
         webDriver = new FirefoxDriver();
         webDriver.get(url);
+        webDriver.manage().window().maximize();
+        return webDriver;
     }
 
-    public void edgeBrowserSetup(WebDriver webDriver, String url) {
+    public WebDriver edgeBrowserSetup(WebDriver webDriver, String url) {
         webDriver = new EdgeDriver();
         webDriver.get(url);
+        webDriver.manage().window().maximize();
+        return webDriver;
     }
 }
