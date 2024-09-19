@@ -23,7 +23,7 @@ public class BrowserOpen {
 		webDriver = browserSetup.chromeBrowserSetup(webDriver, companyURL);
 		System.out.println(webDriver.getTitle());
 		
-		//Closing the pop up in the website
+		//TODO: Closing the pop up in the website
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(20)); // 20 seconds timeout
 
         try {
